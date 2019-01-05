@@ -46,7 +46,7 @@ const catWoman = new Human('Lili', 'female', 'meow-meow! Who is there?', ['Tor, 
 let inhabitants = [dog, cat, woman, man, catWoman];
 
 inhabitants.forEach(element => {
-  print(element.getInfo());
+  element.getInfo();
 });
 
 
