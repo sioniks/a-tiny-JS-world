@@ -7,60 +7,47 @@
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
-const dog = {
-  species: 'dog',
-  name: 'Toby',
-  gender: 'male',
-  legs: 4,
-  hands: 0,
-  saying: 'woof-woof!',
-  friends: ["Fabula"]
-};
+class Inhabitant {
+  constructor(name, gender, saying, friends, species, legs, hands) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.saying = saying;
+    this.friends = friends;
+    this.legs = legs;
+    this.hands = hands;
+  }
 
-const cat = {
-  species: 'cat',
-  name: 'Fabula',
-  gender: 'female',
-  legs: 4,
-  hands: 0,
-  saying: 'meow-meow!',
-  friends: ['Toby', 'Kandy', 'Lili']
-};
+  getInfo() {
+    let legsCount = this.legs === null ? '' : `${this.legs}; `;
+    let handsCount = this.hands === null ? '' : `${this.hands}; `;
+    return `${this.species}; ` + `<strong>${this.name}</strong>; ` + `${this.gender}; ` + legsCount + handsCount + `<em>${this.saying}</em>; ` + `${this.friends};`;
+  }
+}
 
-const man = {
-  species: 'human',
-  name: 'Kan',
-  gender: 'male',
-  legs: 2,
-  hands: 2,
-  saying: 'I am Superman!',
-  friends: ['Kan']
-};
+class Animal extends Inhabitant {
+  constructor(name, gender, saying, friends, species, legs = 4, hands = null) {
+    super(name, gender, saying, friends, species, legs, hands)
+  }
 
-const woman = {
-  species: 'human',
-  name: 'Kandy',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: 'Who is there?',
-  friends: ['Kan', 'Fabula']
-};
+}
 
-const catWoman = {
-  species: 'human',
-  name: 'Lili',
-  gender: 'female',
-  legs: 2,
-  hands: 2,
-  saying: cat.saying + ' Who is there?',
-  friends: ['Fabula']
-};
+class Human extends Inhabitant {
+  constructor(name, gender, saying, friends, species = 'human', legs = null, hands = 2) {
+    super(name, gender, saying, friends, species, legs, hands)
+  }
+}
+const dog = new Animal('Toby', 'male', 'woof-woof!', ['Tiki, Taki'], 'dog');
+const cat = new Animal('Fabula', 'female', 'meow-meow!', ['Tom, Mimi'], 'cat');
+const man = new Human('Kan', 'male', 'I am Superman!', ['Tony, Alice']);
+const woman = new Human('Kandy', 'female', 'Who is there?', ['Kan, Andy']);
+const catWoman = new Human('Lili', 'female', 'meow-meow! Who is there?', ['Tor, Iron-man']);
 
-const inhabitants = [dog, cat, man, woman, catWoman];
+let inhabitants = [dog, cat, woman, man, catWoman];
+
 inhabitants.forEach(element => {
-  print([element.species, element.gender, element.name, element.saying, element.legs, element.hands, element.friends].join('; '));
-})
+  print(element.getInfo());
+});
 
 
 // ======== OUTPUT ========
