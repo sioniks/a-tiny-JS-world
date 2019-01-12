@@ -8,55 +8,57 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(name, gender, saying, friends, species, legs) {
+  constructor(name, gender, saying, friends) {
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
-    this.legs = legs;
-    this.species = species;
-  }
-
-  getInfo() {
-    let massage = [
-      `${this.species}`,
-      `<strong>${this.name}</strong>`,
-      `${this.gender}`,
-      `${this.legs}`,
-      `<em>${this.saying}</em>`,
-      `${this.friends}`
-    ];
-    massage = massage.filter(function (n) {
-      return n !== ''
-    });
-    return massage.join('; ');
   }
 }
 
 class Cat extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'cat', 4);
+  constructor(name, gender, saying, friends, legs) {
+    super(name, gender, saying, friends, legs);
+    this.species = 'cat';
+    this.legs = 4;
   }
+
 }
 
 class Dog extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'dog', 4);
+    super(name, gender, saying, friends);
+    this.species = 'dog';
+    this.legs = 4;
   }
 
 }
 
 class Human extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'human', 2);
+    super(name, gender, saying, friends);
+    this.species = 'human';
+    this.legs = 2;
     this.hands = 2;
   }
-
-  getInfo() {
-    let info = super.getInfo() + `; ${this.hands};`;
-    return info;
-  }
 }
+
+function getInfo(obj) {
+  let massage = [
+    `${this.species}`,
+    `<strong>${this.name}</strong>`,
+    `${this.gender}`,
+    this.legs === (null || undefined) ? '' : `${this.legs}`,
+    this.hands === (null || undefined) ? '' : `${this.hands}`,
+    `<em>${this.saying}</em>`,
+    `${this.friends}`
+  ];
+  massage = massage.filter(function (n) {
+    return n !== ''
+  });
+  return massage.join('; ');
+}
+
 const dog = new Dog('Toby', 'male', 'woof-woof!', ['Tiki, Taki']);
 const cat = new Cat('Fabula', 'female', 'meow-meow!', ['Tom, Mimi']);
 const man = new Human('Kan', 'male', 'I am Superman!', ['Tony, Alice']);
@@ -66,7 +68,8 @@ const catWoman = new Human('Lili', 'female', 'meow-meow! Who is there?', ['Tor, 
 let inhabitants = [dog, cat, woman, man, catWoman];
 
 inhabitants.forEach(element => {
-  print(element.getInfo());
+  console.log(element);
+  // print(getInfo(element));
 });
 
 

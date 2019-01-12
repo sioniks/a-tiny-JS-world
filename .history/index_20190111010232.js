@@ -34,26 +34,33 @@ class Inhabitant {
 }
 
 class Cat extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'cat', 4);
+  constructor(name, gender, saying, friends, legs) {
+    super(name, gender, saying, friends, legs);
+    this.species = 'cat';
+    this.legs = 4;
   }
 }
 
 class Dog extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'dog', 4);
+    super(name, gender, saying, friends);
+    this.species = 'dog';
+    this.legs = 4;
   }
 
 }
 
 class Human extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'human', 2);
+  constructor(name, gender, saying, friends, legs) {
+    super(name, gender, saying, friends, legs);
+    this.species = 'human';
+    this.legs = 2;
     this.hands = 2;
   }
 
   getInfo() {
-    let info = super.getInfo() + `; ${this.hands};`;
+    let info = super.getInfo() + ` ${this.hands}`;
+
     return info;
   }
 }
@@ -64,6 +71,8 @@ const woman = new Human('Kandy', 'female', 'Who is there?', ['Kan, Andy']);
 const catWoman = new Human('Lili', 'female', 'meow-meow! Who is there?', ['Tor, Iron-man']);
 
 let inhabitants = [dog, cat, woman, man, catWoman];
+
+console.log(man.getInfo());
 
 inhabitants.forEach(element => {
   print(element.getInfo());

@@ -8,13 +8,14 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(name, gender, saying, friends, species, legs) {
+  constructor(name, gender, saying, friends, species, legs, hands) {
+    this.species = species;
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
     this.legs = legs;
-    this.species = species;
+    this.hands = hands;
   }
 
   getInfo() {
@@ -22,43 +23,32 @@ class Inhabitant {
       `${this.species}`,
       `<strong>${this.name}</strong>`,
       `${this.gender}`,
-      `${this.legs}`,
+      this.legs === null ? "" : `${this.legs}`,
+      this.hands === null ? "" : `${this.hands}`,
       `<em>${this.saying}</em>`,
       `${this.friends}`
-    ];
-    massage = massage.filter(function (n) {
-      return n !== ''
-    });
-    return massage.join('; ');
+    ].join('; ');
+    // let legsCount = this.legs === null ? '' : `${this.legs}; `;
+    // let handsCount = this.hands === null ? '' : `${this.hands}; `;
+    // return `${this.species}; ` + `<strong>${this.name}</strong>; ` + `${this.gender}; ` + legsCount + handsCount + `<em>${this.saying}</em>; ` + `${this.friends};`;
+    return massage;
   }
 }
 
-class Cat extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'cat', 4);
-  }
-}
-
-class Dog extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'dog', 4);
+class Animal extends Inhabitant {
+  constructor(name, gender, saying, friends, species, legs = 4, hands = null) {
+    super(name, gender, saying, friends, species, legs, hands)
   }
 
 }
 
 class Human extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'human', 2);
-    this.hands = 2;
-  }
-
-  getInfo() {
-    let info = super.getInfo() + `; ${this.hands};`;
-    return info;
+  constructor(name, gender, saying, friends, species = 'human', legs = null, hands = 2) {
+    super(name, gender, saying, friends, species, legs, hands)
   }
 }
-const dog = new Dog('Toby', 'male', 'woof-woof!', ['Tiki, Taki']);
-const cat = new Cat('Fabula', 'female', 'meow-meow!', ['Tom, Mimi']);
+const dog = new Animal('Toby', 'male', 'woof-woof!', ['Tiki, Taki'], 'dog');
+const cat = new Animal('Fabula', 'female', 'meow-meow!', ['Tom, Mimi'], 'cat');
 const man = new Human('Kan', 'male', 'I am Superman!', ['Tony, Alice']);
 const woman = new Human('Kandy', 'female', 'Who is there?', ['Kan, Andy']);
 const catWoman = new Human('Lili', 'female', 'meow-meow! Who is there?', ['Tor, Iron-man']);

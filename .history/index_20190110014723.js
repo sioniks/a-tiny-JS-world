@@ -8,16 +8,24 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(name, gender, saying, friends, species, legs) {
+  constructor(name, gender, saying, friends) {
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
-    this.legs = legs;
-    this.species = species;
   }
 
+  getInfo() {}
+}
+
+class Cat extends Inhabitant {
+  constructor(name, gender, saying, friends) {
+    super(name, gender, saying, friends);
+    this.species = 'cat';
+    this.legs = 4;
+  }
   getInfo() {
+    super.getInfo();
     let massage = [
       `${this.species}`,
       `<strong>${this.name}</strong>`,
@@ -33,30 +41,54 @@ class Inhabitant {
   }
 }
 
-class Cat extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'cat', 4);
-  }
-}
-
 class Dog extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'dog', 4);
+    super(name, gender, saying, friends);
+    this.species = 'dog';
+    this.legs = 4;
   }
-
+  getInfo() {
+    super.getInfo();
+    let massage = [
+      `${this.species}`,
+      `<strong>${this.name}</strong>`,
+      `${this.gender}`,
+      `${this.legs}`,
+      `<em>${this.saying}</em>`,
+      `${this.friends}`
+    ];
+    massage = massage.filter(function (n) {
+      return n !== ''
+    });
+    return massage.join('; ');
+  }
 }
 
 class Human extends Inhabitant {
   constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'human', 2);
+    super(name, gender, saying, friends);
+    this.species = 'human';
+    this.legs = 2;
     this.hands = 2;
   }
-
   getInfo() {
-    let info = super.getInfo() + `; ${this.hands};`;
-    return info;
+    super.getInfo();
+    let massage = [
+      `${this.species}`,
+      `<strong>${this.name}</strong>`,
+      `${this.gender}`,
+      `${this.legs}`,
+      `${this.hands}`,
+      `<em>${this.saying}</em>`,
+      `${this.friends}`
+    ];
+    massage = massage.filter(function (n) {
+      return n !== ''
+    });
+    return massage.join('; ');
   }
 }
+
 const dog = new Dog('Toby', 'male', 'woof-woof!', ['Tiki, Taki']);
 const cat = new Cat('Fabula', 'female', 'meow-meow!', ['Tom, Mimi']);
 const man = new Human('Kan', 'male', 'I am Superman!', ['Tony, Alice']);

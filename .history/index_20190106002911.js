@@ -8,13 +8,14 @@
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Inhabitant {
-  constructor(name, gender, saying, friends, species, legs) {
+  constructor(name, gender, saying, friends) { //, species, legs, hands
     this.name = name;
     this.gender = gender;
     this.saying = saying;
     this.friends = friends;
-    this.legs = legs;
-    this.species = species;
+    // this.species = species;
+    // this.legs = legs;
+    // this.hands = hands;
   }
 
   getInfo() {
@@ -22,39 +23,38 @@ class Inhabitant {
       `${this.species}`,
       `<strong>${this.name}</strong>`,
       `${this.gender}`,
-      `${this.legs}`,
+      this.legs === (null || undefined) ? '' : `${this.legs}`,
+      this.hands === (null || undefined) ? '' : `${this.hands}`,
       `<em>${this.saying}</em>`,
       `${this.friends}`
     ];
-    massage = massage.filter(function (n) {
-      return n !== ''
-    });
+    massage = massage.filter(function (n) { return n != '' }); 
     return massage.join('; ');
   }
 }
 
 class Cat extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'cat', 4);
+  constructor(name, gender, saying, friends, species = 'cat', legs = 4) {
+    super(name, gender, saying, friends);
+    this.species = species;
+    this.legs = legs;
   }
 }
 
 class Dog extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'dog', 4);
+  constructor(name, gender, saying, friends, species = 'dog', legs = 4) {
+    super(name, gender, saying, friends);
+    this.species = species;
+    this.legs = legs;
   }
-
 }
 
 class Human extends Inhabitant {
-  constructor(name, gender, saying, friends) {
-    super(name, gender, saying, friends, 'human', 2);
-    this.hands = 2;
-  }
-
-  getInfo() {
-    let info = super.getInfo() + `; ${this.hands};`;
-    return info;
+  constructor(name, gender, saying, friends, species = 'human', legs = 2, hands = 2) {
+    super(name, gender, saying, friends);
+    this.species = species;
+    this.legs = legs;
+    this.hands = hands;
   }
 }
 const dog = new Dog('Toby', 'male', 'woof-woof!', ['Tiki, Taki']);
@@ -88,3 +88,4 @@ inhabitants.forEach(element => {
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
    print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
    */
+  
